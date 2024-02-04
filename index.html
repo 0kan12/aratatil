@@ -20,13 +20,23 @@
             color: #333;
             margin-top: 20px;
         }
+        #speakButton {
+            margin-top: 20px;
+            padding: 10px;
+            font-size: 1em;
+            cursor: pointer;
+            background-color: #fff;
+            color: #333;
+            border: none;
+            border-radius: 5px;
+        }
     </style>
 </head>
 <body>
 
     <h1>Ara Tatile Kalan Süre</h1>
     <div id="countdown"></div>
-
+    <button id="speakButton" onclick="speakCountdown()">Kalan Zamanı Söyle</button>
     <script>
         var targetDate = new Date('2024-04-11T00:00:00');
 
@@ -45,9 +55,17 @@
                 document.getElementById('countdown').innerHTML = 'Süre doldu!';
             }
         }
+
+        function speakCountdown() {
+            var countdownText = document.getElementById('countdown').innerText;
+            var utterance = new SpeechSynthesisUtterance(countdownText);
+            utterance.lang = 'tr-TR';
+            window.speechSynthesis.speak(utterance);
+        }
         setInterval(updateCountdown, 1000);
         updateCountdown();
     </script>
+
 
 </body>
 </html>
